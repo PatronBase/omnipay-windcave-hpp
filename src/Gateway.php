@@ -31,7 +31,25 @@ class Gateway extends AbstractGateway
         return [];
     }
 
-    /* @todo add other functions */
+    public function setApiUsername($value)
+    {
+        return $this->setParameter('apiUsername', $value);
+    }
+
+    public function getApiUsername()
+    {
+        return $this->getParameter('apiUsername');
+    }
+
+    public function setApiKey($value)
+    {
+        return $this->setParameter('apiKey', $value);
+    }
+
+    public function getApiKey()
+    {
+        return $this->getParameter('apiKey');
+    }
 
     /**
      * Purchase

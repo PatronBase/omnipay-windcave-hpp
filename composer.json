@@ -26,12 +26,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Omnipay\\Windcave-Hpp\\": "src/"
+            "Omnipay\\WindcaveHpp\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Omnipay\\Windcave-Hpp\\": "src/"
+            "Omnipay\\WindcaveHpp\\": "src/"
         }
     },
     "require": {
