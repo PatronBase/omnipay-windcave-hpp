@@ -23,8 +23,6 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
 
     public function getRedirectUrl()
     {
-        echo '<pre>'; print_r($this->data); echo '</pre>';
-
         foreach ( $this->data->links ?? [] as $link ) {
             if ( $link->rel === 'hpp' ) {
                 return $link->href;
@@ -36,7 +34,6 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
 
     public function getRedirectData()
     {
-        return [
-        ];
+        return [];
     }
 }

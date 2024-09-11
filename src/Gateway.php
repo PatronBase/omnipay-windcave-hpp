@@ -3,6 +3,7 @@
 namespace Omnipay\WindcaveHpp;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\WindcaveHpp\Message\AcceptNotification;
 use Omnipay\WindcaveHpp\Message\CompletePurchaseRequest;
 use Omnipay\WindcaveHpp\Message\PurchaseRequest;
 
@@ -18,7 +19,7 @@ class Gateway extends AbstractGateway
      */
     public function getName()
     {
-        return 'Windcave HPP';
+        return 'Windcave Hpp';
     }
 
     /**
@@ -73,8 +74,19 @@ class Gateway extends AbstractGateway
      *
      * @return Omnipay\WindcaveHpp\Message\CompletePurchaseRequest
      */
-    public function completePurchase(array $parameters = array())
+    public function completePurchase(array $parameters = [])
     {
-        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
+        return $this->createRequest(
+            CompletePurchaseRequest::class,
+            $parameters
+        );
+    }
+
+    public function acceptNotification(array $parameters = [])
+    {
+        return $this->createRequest(
+            AcceptNotification::class,
+            $parameters
+        )->send();
     }
 }

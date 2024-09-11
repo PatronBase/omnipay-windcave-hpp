@@ -43,7 +43,6 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getTransactionId()
     {
         return $this->getTransactionResult()['merchantReference'] ?? '';
-
     }
 
     public function getTransactionReference()

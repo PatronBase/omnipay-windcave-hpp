@@ -11,23 +11,9 @@ class CompletePurchaseRequest extends PurchaseRequest
 {
     public function getData()
     {
-        $this->validate('sessionId');
+        return $this->httpRequest->request->all();
 
-        return [
-            'sessionId' => $this->getSessionId(),
-        ];
     }
-
-    public function setSessionId($sessionId)
-    {
-        return $this->setParameter('sessionId', $sessionId);
-    }
-
-    public function getSessionId()
-    {
-        return $this->getParameter('sessionId');
-    }
-
     public function sendData($data)
     {
         if ( !$data['sessionId'] ) {
