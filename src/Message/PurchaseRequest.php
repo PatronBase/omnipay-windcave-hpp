@@ -191,6 +191,19 @@ class PurchaseRequest extends AbstractRequest {
         return $this->getParameter('recurringFrequency');
     }
 
+    public function setRecurringExpiry($value)
+    {
+        // For scenarios where no expiry/end date is established i.e.,
+        // subscription payments, the merchant web application should use "9999-12-31" as the value.
+
+        return $this->setParameter('recurringExpiry', $value);
+    }
+
+    public function getRecurringExpiry()
+    {
+        return $this->getParameter('recurringExpiry');
+    }
+
     public function getData()
     {
         $this->validate('apiUsername', 'apiKey', 'amount', 'currency');
@@ -202,6 +215,22 @@ class PurchaseRequest extends AbstractRequest {
         $data['currency'] = $this->getCurrency();
         $data['storeCard'] = (bool) $this->getStoreCard() ?? false;
         $data['callbackUrls'] = [];
+
+        if ( $this->getStoredCardIndicator() ) {
+            $data['storedCardIndicator'] = $this->getStoredCardIndicator();
+        }
+
+        if ( $this->getRecurringExpiry() ) {
+            $data['recurringExpiry'] = $this->getRecurringExpiry();
+        }
+
+        if ( $this->getRecurringFrequency() ) {
+            $data['recurringFrequency'] = $this->getRecurringFrequency();
+        }
+
+        if ( $this->getToken() ) {
+            $data['cardId'] = $this->getToken();
+        }
 
         if ( is_array($this->getPaymentMethods()) ) {
             $data['methods'] = $this->getPaymentMethods();

@@ -82,6 +82,21 @@ class Gateway extends AbstractGateway
         );
     }
 
+    /**
+     * Complete a purchase process and save card
+     *
+     * @param array $parameters
+     *
+     * @return Omnipay\WindcaveHpp\Message\CompletePurchaseRequest
+     */
+    public function completeCreateCard(array $parameters = [])
+    {
+        return $this->createRequest(
+            CompletePurchaseRequest::class,
+            $parameters
+        );
+    }
+
     public function acceptNotification(array $parameters = [])
     {
         return $this->createRequest(

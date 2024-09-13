@@ -96,4 +96,9 @@ class CompletePurchaseResponse extends AbstractResponse
     {
         return $this->getCard()['type'] ?? '';
     }
+
+    public function getCardReference()
+    {
+        return $this->getCard()['id'] ?? null;
+    }
 }
