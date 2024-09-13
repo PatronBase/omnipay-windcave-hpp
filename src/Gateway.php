@@ -67,6 +67,14 @@ class Gateway extends AbstractGateway
         );
     }
 
+    public function createCard(array $parameters = [])
+    {
+        return $this->createRequest(
+            PurchaseRequest::class,
+            $parameters + ['store_card' => true]
+        );
+    }
+
     /**
      * Complete a purchase process
      *
