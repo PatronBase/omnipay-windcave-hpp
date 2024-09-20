@@ -213,8 +213,11 @@ class PurchaseRequest extends AbstractRequest {
         $data['type'] = $this->getType();
         $data['amount'] = $this->getAmount();
         $data['currency'] = $this->getCurrency();
-        $data['storeCard'] = (bool) $this->getStoreCard() ?? false;
         $data['callbackUrls'] = [];
+
+        if ( $this->getStoreCard() ) {
+            $data['storeCard'] = true;
+        }
 
         if ( $this->getStoredCardIndicator() ) {
             $data['storedCardIndicator'] = $this->getStoredCardIndicator();
