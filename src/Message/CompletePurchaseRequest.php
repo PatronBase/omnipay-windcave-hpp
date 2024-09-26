@@ -7,16 +7,14 @@ use Omnipay\Common\Exception\InvalidRequestException;
 /**
  * Windcave HPP Complete Purchase Request
  */
-class CompletePurchaseRequest extends PurchaseRequest
-{
-    public function getData()
-    {
+class CompletePurchaseRequest extends PurchaseRequest {
+    public function getData() {
         return $this->httpRequest->request->all();
 
     }
-    public function sendData($data)
-    {
-        if ( !$data['sessionId'] ) {
+
+    public function sendData($data) {
+        if (!$data['sessionId']) {
             throw new InvalidRequestException('Session id is required');
         }
 
@@ -30,7 +28,8 @@ class CompletePurchaseRequest extends PurchaseRequest
 
         try {
             $httpResponse = $this->httpClient->request('GET', $this->getEndpoint('sessions/' . $sessionId), $headers);
-        } catch (\Exception $exception) {
+        }
+        catch (\Exception $exception) {
             throw new InvalidRequestException($exception->getMessage());
         }
 

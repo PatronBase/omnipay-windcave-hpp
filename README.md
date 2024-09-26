@@ -22,7 +22,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "PatronBase/omnipay-smartpay": "~3.0"
+        "PatronBase/omnipay-windcave-hpp": "~1.0"
     }
 }
 ```
@@ -36,7 +36,7 @@ And run composer to update your dependencies:
 
 The following gateways are provided by this package:
 
-* SmartPay\Merchant Hosted Integration v1.0
+* Windcave REST API Hosted Payment Page (HPP)
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.
@@ -51,5 +51,5 @@ If you want to keep up to date with release anouncements, discuss ideas for the 
 or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
 you can subscribe to.
 
-If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/PatronBase/omnipay-smartpay/issues),
+If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/PatronBase/omnipay-windcave-hpp/issues),
 or better yet, fork the library and submit a pull request.

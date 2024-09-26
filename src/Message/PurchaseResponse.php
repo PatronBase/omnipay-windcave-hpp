@@ -11,20 +11,17 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  */
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface {
 
-    public function isSuccessful()
-    {
+    public function isSuccessful() {
         return false;
     }
 
-    public function isRedirect()
-    {
+    public function isRedirect() {
         return true;
     }
 
-    public function getRedirectUrl()
-    {
+    public function getRedirectUrl() {
         foreach ( $this->data->links ?? [] as $link ) {
-            if ( $link->rel === 'hpp' ) {
+            if ($link->rel === 'hpp') {
                 return $link->href;
             }
         }
@@ -32,8 +29,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         throw new InvalidResponseException('Invalid response from windcave server');
     }
 
-    public function getRedirectData()
-    {
+    public function getRedirectData() {
         return [];
     }
 }
