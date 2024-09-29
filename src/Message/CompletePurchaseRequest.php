@@ -11,8 +11,10 @@ class CompletePurchaseRequest extends PurchaseRequest
 {
     public function getData()
     {
-        return $this->httpRequest->request->all();
-
+        return [
+            'sessionId' => $this->getParameter('sessionId') ?? $this->httpRequest->query->get('sessionId') ?? $this->httpRequest->request->get('sessionId') ?? '',
+            'username' => $this->getParameter('username') ?? $this->httpRequest->query->get('username') ?? $this->httpRequest->request->get('username') ?? '',
+        ];
     }
     public function sendData($data)
     {
