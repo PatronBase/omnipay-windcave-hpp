@@ -82,7 +82,7 @@ class CompletePurchaseResponse extends AbstractResponse
         return $this->getCard()['cardNumber'] ?? '';
     }
 
-    public function cardHolderName()
+    public function getCardHolderName()
     {
         return $this->getCard()['cardHolderName'] ?? '';
     }
