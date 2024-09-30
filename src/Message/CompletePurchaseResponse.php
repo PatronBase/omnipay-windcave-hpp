@@ -89,7 +89,17 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getCardExpiry()
     {
-        return ($this->getCard()['dateExpiryMonth'] ?? '') . '/' . ($this->getCard()['dateExpiryYear'] ?? '');
+        return $this->getCardExpiryMonth() . '/' . $this->getCardExpiryYear();
+    }
+
+    public function getCardExpiryYear()
+    {
+        return $this->getCard()['dateExpiryYear'] ?? '';
+    }
+
+    public function getCardExpiryMonth()
+    {
+        return $this->getCard()['dateExpiryMonth'] ?? '';
     }
 
     public function getCardType()
