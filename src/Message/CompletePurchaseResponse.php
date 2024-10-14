@@ -35,7 +35,7 @@ class CompletePurchaseResponse extends AbstractResponse
         ) ?? false;
     }
 
-    protected function getTransactionResult()
+    public function getTransactionResult()
     {
         return $this->getData()['transactions'][0] ?? [];
     }
@@ -53,6 +53,11 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getTransactionType()
     {
         return $this->getTransactionResult()['type'] ?? '';
+    }
+
+    public function getTransactionMethod()
+    {
+        return $this->getTransactionResult()['method'] ?? '';
     }
 
     public function getMessage()
