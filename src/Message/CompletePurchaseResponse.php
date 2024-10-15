@@ -114,6 +114,10 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getCardReference()
     {
+        if ( !in_array($this->getTransactionMethod(), ['card']) ) {
+            return null;
+        }
+
         return $this->getCard()['id'] ?? null;
     }
 }
