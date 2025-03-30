@@ -6,6 +6,7 @@ use Omnipay\Common\AbstractGateway;
 use Omnipay\WindcaveHpp\Message\AcceptNotification;
 use Omnipay\WindcaveHpp\Message\CompletePurchaseRequest;
 use Omnipay\WindcaveHpp\Message\PurchaseRequest;
+use Omnipay\WindcaveHpp\Message\RefundRequest;
 
 /**
  * Windcave HPP Payment Gateway
@@ -111,5 +112,20 @@ class Gateway extends AbstractGateway
             AcceptNotification::class,
             $parameters
         )->send();
+    }
+
+    /**
+     * Refund
+     *
+     * @param array $parameters Parameters
+     *
+     * @return Omnipay\WindcaveHpp\Message\RefundRequest
+     */
+    public function refund(array $parameters = [])
+    {
+        return $this->createRequest(
+            RefundRequest::class,
+            $parameters
+        );
     }
 }
