@@ -47,7 +47,84 @@ abstract class BaseRequest extends AbstractRequest
         return $this->getParameter('merchantReference');
     }
 
-    // Store Card Options
+    public function setType($value)
+    {
+        return $this->setParameter('type', $value);
+    }
+
+    public function getType()
+    {
+        return $this->getParameter('type') ?? 'purchase';
+    }
+
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
+    }
+
+    public function getLanguage()
+    {
+        return $this->getParameter('language') ?? 'en';
+    }
+
+    /**
+     * @param $list
+     * Possible methods: ['card', 'account2account', 'alipay', 'applepay', 'googlepay', 'paypal', 'interac', 'unionpay', 'oxipay', 'visacheckout', 'wechat']
+     *
+     * @return PurchaseRequest
+     */
+    public function setPaymentMethods($list)
+    {
+        $options = [
+            'card', 'account2account', 'alipay', 'applepay',
+            'googlepay', 'paypal', 'interac', 'unionpay',
+            'oxipay', 'visacheckout', 'wechat'
+        ];
+
+        foreach ( $list as $method ) {
+            if ( !in_array($method, $options) ) {
+                throw new InvalidRequestException("Unknown payment method: {$method}");
+            }
+        }
+
+        return $this->setParameter('paymentMethods', $list);
+    }
+
+    public function getPaymentMethods()
+    {
+        return $this->getParameter('paymentMethods');
+    }
+
+    public function setCardTypes($list)
+    {
+        return $this->setParameter('cardTypes', $list);
+    }
+
+    public function getCardTypes()
+    {
+        return $this->getParameter('cardTypes');
+    }
+
+    public function setExpiresAt($value)
+    {
+        return $this->setParameter('expiresAt', $value);
+    }
+
+    public function getExpiresAt()
+    {
+        return $this->getParameter('expiresAt');
+    }
+
+    public function setDeclineUrl($url)
+    {
+        return $this->setParameter('declineUrl', $url);
+    }
+
+    public function getDeclineUrl()
+    {
+        return $this->getParameter('declineUrl');
+    }
+
     public function setStoreCard($value)
     {
         return $this->setParameter('storeCard', $value);
@@ -63,23 +140,22 @@ abstract class BaseRequest extends AbstractRequest
         $options = [
             'single', 'recurringfixed', 'recurringvariable', 'installment',
             'recurringnoexpiry', 'recurringinitial', 'installmentinitial', 'credentialonfileinitial',
-            'unscheduledcredentialonfileinitial', 'credentialonfile', 'unscheduledcredentialonfile',
-            'incremental', 'resubmission', 'reauthorisation', 'delayedcharges', 'noshow'
+            'unscheduledcredentialonfileinitial', 'credentialonfile', 'unscheduledcredentialonfile', 'incremental',
+            'resubmission', 'reauthorisation', 'delayedcharges', 'noshow'
         ];
 
-        if (!in_array($value, $options)) {
+        if ( ! in_array($value, $options) ) {
             throw new InvalidRequestException("Invalid option '{$value}' set for StoredCardIndicator.");
         }
 
-        return $this->setParameter('storeCardIndicator', $value);
+        return $this->setParameter('storedCardIndicator', $value);
     }
 
     public function getStoredCardIndicator()
     {
-        return $this->getParameter('storeCardIndicator');
+        return $this->getParameter('storedCardIndicator');
     }
 
-    // Metadata
     public function setMetadata($data)
     {
         return $this->setParameter('metaData', $data);
@@ -90,7 +166,7 @@ abstract class BaseRequest extends AbstractRequest
         return $this->getParameter('metaData');
     }
 
-    // Recurring Frequency
+
     public function setRecurringFrequency($value)
     {
         $options = [
@@ -100,7 +176,7 @@ abstract class BaseRequest extends AbstractRequest
             'twomonthly', 'threemonthly', 'fourmonthly', 'sixmonthly', 'annually'
         ];
 
-        if (!in_array($value, $options)) {
+        if ( ! in_array($value, $options) ) {
             throw new InvalidRequestException("Invalid option '{$value}' set for RecurringFrequency.");
         }
 
@@ -110,6 +186,19 @@ abstract class BaseRequest extends AbstractRequest
     public function getRecurringFrequency()
     {
         return $this->getParameter('recurringFrequency');
+    }
+
+    public function setRecurringExpiry($value)
+    {
+        // For scenarios where no expiry/end date is established i.e.,
+        // subscription payments, the merchant web application should use "9999-12-31" as the value.
+
+        return $this->setParameter('recurringExpiry', $value);
+    }
+
+    public function getRecurringExpiry()
+    {
+        return $this->getParameter('recurringExpiry');
     }
 
     // Endpoint selection based on test mode
