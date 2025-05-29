@@ -72,4 +72,39 @@ class AcceptNotification extends PurchaseRequest implements NotificationInterfac
     public function getMessage() {
         return $this->getResponseText() ?? '';
     }
+
+    public function getCard()
+    {
+        return $this->getTransactionResult()['card'] ?? '';
+    }
+
+    public function getCardNumber()
+    {
+        return $this->getCard()['cardNumber'] ?? '';
+    }
+
+    public function cardHolderName()
+    {
+        return $this->getCard()['cardHolderName'] ?? '';
+    }
+
+    public function getCardExpiry()
+    {
+        return ($this->getCard()['dateExpiryMonth'] ?? '') . '/' . ($this->getCard()['dateExpiryYear'] ?? '');
+    }
+
+    public function getCardType()
+    {
+        return $this->getCard()['type'] ?? '';
+    }
+
+    public function getCardReference()
+    {
+        return $this->getCard()['id'] ?? null;
+    }
+
+    public function getTransactionResult()
+    {
+        return $this->getTransaction() ?? [];
+    }
 }
