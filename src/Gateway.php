@@ -6,17 +6,20 @@ use Omnipay\Common\AbstractGateway;
 use Omnipay\WindcaveHpp\Message\AcceptNotification;
 use Omnipay\WindcaveHpp\Message\CompletePurchaseRequest;
 use Omnipay\WindcaveHpp\Message\PurchaseRequest;
+use Omnipay\WindcaveHpp\Message\RefundRequest;
 
 /**
  * Windcave HPP Payment Gateway
  */
-class Gateway extends AbstractGateway {
+class Gateway extends AbstractGateway
+{
     /**
      * Get name
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'Windcave Hpp';
     }
 
@@ -25,23 +28,28 @@ class Gateway extends AbstractGateway {
      *
      * @return array
      */
-    public function getDefaultParameters() {
+    public function getDefaultParameters()
+    {
         return [];
     }
 
-    public function setApiUsername($value) {
+    public function setApiUsername($value)
+    {
         return $this->setParameter('apiUsername', $value);
     }
 
-    public function getApiUsername() {
+    public function getApiUsername()
+    {
         return $this->getParameter('apiUsername');
     }
 
-    public function setApiKey($value) {
+    public function setApiKey($value)
+    {
         return $this->setParameter('apiKey', $value);
     }
 
-    public function getApiKey() {
+    public function getApiKey()
+    {
         return $this->getParameter('apiKey');
     }
 
@@ -52,10 +60,19 @@ class Gateway extends AbstractGateway {
      *
      * @return Omnipay\WindcaveHpp\Message\PurchaseRequest
      */
-    public function purchase(array $parameters = []) {
+    public function purchase(array $parameters = [])
+    {
         return $this->createRequest(
             PurchaseRequest::class,
             $parameters
+        );
+    }
+
+    public function createCard(array $parameters = [])
+    {
+        return $this->createRequest(
+            PurchaseRequest::class,
+            $parameters + ['store_card' => true]
         );
     }
 
@@ -66,17 +83,49 @@ class Gateway extends AbstractGateway {
      *
      * @return Omnipay\WindcaveHpp\Message\CompletePurchaseRequest
      */
-    public function completePurchase(array $parameters = []) {
+    public function completePurchase(array $parameters = [])
+    {
         return $this->createRequest(
             CompletePurchaseRequest::class,
             $parameters
         );
     }
 
-    public function acceptNotification(array $parameters = []) {
+    /**
+     * Complete a purchase process and save card
+     *
+     * @param array $parameters
+     *
+     * @return Omnipay\WindcaveHpp\Message\CompletePurchaseRequest
+     */
+    public function completeCreateCard(array $parameters = [])
+    {
+        return $this->createRequest(
+            CompletePurchaseRequest::class,
+            $parameters
+        );
+    }
+
+    public function acceptNotification(array $parameters = [])
+    {
         return $this->createRequest(
             AcceptNotification::class,
             $parameters
         )->send();
+    }
+
+    /**
+     * Refund
+     *
+     * @param array $parameters Parameters
+     *
+     * @return Omnipay\WindcaveHpp\Message\RefundRequest
+     */
+    public function refund(array $parameters = [])
+    {
+        return $this->createRequest(
+            RefundRequest::class,
+            $parameters
+        );
     }
 }
