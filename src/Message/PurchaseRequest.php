@@ -57,8 +57,10 @@ class PurchaseRequest extends BaseRequest
             $data['metaData'] = $this->getMetadata();
         }
 
-        if ( $this->getMerchantReference() ) {
-            $data['merchantReference'] = $this->getMerchantReference();
+        $merchantReference = $this->getMerchantReference() ?? $this->getDescription();
+
+        if ( $merchantReference ) {
+            $data['merchantReference'] = $merchantReference;
         }
 
         if ( $this->getReturnUrl() ) {
