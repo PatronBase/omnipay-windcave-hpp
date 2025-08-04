@@ -25,7 +25,7 @@ class PurchaseRequest extends BaseRequest
         $data['currency'] = $this->getCurrency();
         $data['callbackUrls'] = [];
 
-        if ( $this->getStoreCard() ) {
+        if ( (bool) $this->getCreateToken() ) {
             $data['storeCard'] = true;
         }
 
@@ -41,8 +41,8 @@ class PurchaseRequest extends BaseRequest
             $data['recurringFrequency'] = $this->getRecurringFrequency();
         }
 
-        if ( $this->getToken() ) {
-            $data['cardId'] = $this->getToken();
+        if ( $this->getToken() || $this->getCardReference() ) {
+            $data['cardId'] = $this->getToken() ?? $this->getCardReference();
         }
 
         if ( is_array($this->getPaymentMethods()) ) {

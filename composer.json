@@ -10,7 +10,10 @@
         "merchant",
         "omnipay",
         "pay",
-        "payment"
+        "payment",
+        "hosted",
+        "checkout",
+        "redirect"
     ],
     "homepage": "https://github.com/PatronBase/omnipay-windcave-hpp",
     "license": "MIT",
@@ -22,6 +25,10 @@
         {
             "name": "Aimal Muhammad",
             "email": "aimal.azmi.13@gmail.com"
+        },
+        {
+            "name": "Leith Caldwell",
+            "email": "leith@codedruids.com"
         }
     ],
     "autoload": {
@@ -35,17 +42,28 @@
         }
     },
     "require": {
-        "omnipay/common": "^3",
-        "php": "^7||^8"
+        "omnipay/common": "^3.1",
+        "php": "^7.2||^8"
     },
     "require-dev": {
-        "omnipay/tests": "^3",
-        "squizlabs/php_codesniffer": "^3.5"
+        "omnipay/tests": "^4.2",
+        "squizlabs/php_codesniffer": "^3.5",
+        "http-interop/http-factory-guzzle": "^1.1"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 src/",
+        "fix-style": "phpcbf -p --standard=PSR2 src/"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     },
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    }
 }

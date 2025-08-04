@@ -2,7 +2,7 @@
 
 **Windcave REST API (Hosted Payment Page) driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/PatronBase/omnipay-windcave-hpp.png?branch=main)](https://app.travis-ci.com/github/PatronBase/omnipay-windcave-hpp)
+![Build Status](https://github.com/PatronBase/omnipay-windcave-hpp/actions/workflows/main.yml/badge.svg?branch=main)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/PatronBase/omnipay-windcave-hpp.svg?style=flat)](https://scrutinizer-ci.com/g/PatronBase/omnipay-windcave-hpp/code-structure)
 [![Code Quality](https://img.shields.io/scrutinizer/g/PatronBase/omnipay-windcave-hpp.svg?style=flat)](https://scrutinizer-ci.com/g/PatronBase/omnipay-windcave-hpp/?branch=main)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
@@ -11,8 +11,8 @@
 
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.6+. This package implements GoCardless support for Omnipay. It includes
-support for the redirect (3-party) version of the gateway (Redirect Flow).
+processing library for PHP 7.2+. This package implements Windcave REST API support for Omnipay. It
+includes support for the redirect (3-party) version of the gateway (Hosted Payment Page).
 
 ## Installation
 
