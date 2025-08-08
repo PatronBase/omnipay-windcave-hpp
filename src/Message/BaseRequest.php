@@ -36,6 +36,16 @@ abstract class BaseRequest extends AbstractRequest
         return base64_encode($this->getApiUsername() . ':' . $this->getApiKey());
     }
 
+    public function setCreateToken($value)
+    {
+        return $this->setParameter('createToken', $value);
+    }
+
+    public function getCreateToken()
+    {
+        return $this->getParameter('createToken');
+    }
+
     // Merchant Reference
     public function setMerchantReference($value)
     {
@@ -125,14 +135,20 @@ abstract class BaseRequest extends AbstractRequest
         return $this->getParameter('declineUrl');
     }
 
+    /**
+     * @deprecated   Alias. Use standard `setCreateToken()` instead
+     */
     public function setStoreCard($value)
     {
-        return $this->setParameter('storeCard', $value);
+        return $this->setCreateToken($value);
     }
 
+    /**
+     * @deprecated   Alias. Use standard `getCreateToken()` instead
+     */
     public function getStoreCard()
     {
-        return $this->getParameter('storeCard');
+        return $this->getCreateToken();
     }
 
     public function setStoredCardIndicator($value)
