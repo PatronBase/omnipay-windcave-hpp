@@ -1,0 +1,108 @@
+HTTP/1.1 200 OK
+Date: Thu, 01 May 2025 01:43:28 GMT
+Content-Type: application/json; charset=utf-8
+
+{
+  "id": "session123",
+  "state": "complete",
+  "type": "purchase",
+  "amount": "20.00",
+  "currency": "GBP",
+  "currencyNumeric": 826,
+  "merchantReference": "merchantRef1234",
+  "methods": [
+    "card",
+    "paypal",
+    "applepay",
+    "googlepay",
+    "klarna"
+  ],
+  "expires": "2025-08-20T21:45:26Z",
+  "callbackUrls": {
+    "approved": "http://www.example.com/return",
+    "declined": "http://www.example.com/decline",
+    "cancelled": "http://www.example.com/cancel"
+  },
+  "notificationUrl": "http://www.example.com/notify",
+  "storeCard": false,
+  "clientType": "internet",
+  "links": [
+    {
+      "href": "https://uat.windcave.com/api/v1/sessions/session123",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "https://uat.windcave.com/api/v1/transactions/transaction123",
+      "rel": "transaction",
+      "method": "GET"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "transaction123",
+      "username": "merchant",
+      "authorised": true,
+      "allowRetry": false,
+      "retryIndicator": "",
+      "reCo": "00",
+      "responseText": "FAILED",
+      "authCode": "019533",
+      "acquirer": {
+        "name": "Undefined",
+        "mid": "10000000",
+        "tid": "10001548",
+        "reCo": "00",
+        "responseText": "FAILED"
+      },
+      "type": "purchase",
+      "method": "card",
+      "localTimeZone": "UK_GMT",
+      "dateTimeUtc": "2025-08-17T22:06:51Z",
+      "dateTimeLocal": "2025-08-17T23:06:51+01:00",
+      "settlementDate": "2025-08-18",
+      "amount": "20.00",
+      "balanceAmount": "0.00",
+      "currency": "GBP",
+      "currencyNumeric": 826,
+      "clientType": "internet",
+      "merchantReference": "merchantRef123",
+      "card": {
+        "cardNumber2": "1111111111111111",
+        "cardHolderName": "WHPP",
+        "cardNumber": "411111......1111",
+        "dateExpiryMonth": "05",
+        "dateExpiryYear": "28",
+        "type": "visa"
+      },
+      "cvc2ResultCode": "U",
+      "storedCardIndicator": "single",
+      "notificationUrl": "http://www.example.com/notify",
+      "sessionId": "session123",
+      "browser": {
+        "ipAddress": "192.168.1.1",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+      },
+      "isSurcharge": false,
+      "amountTotal": "20.00",
+      "liabilityIndicator": "standard",
+      "links": [
+        {
+          "href": "https://uat.windcave.com/api/v1/transactions/transaction123",
+          "rel": "self",
+          "method": "GET"
+        },
+        {
+          "href": "https://uat.windcave.com/api/v1/sessions/session123",
+          "rel": "session",
+          "method": "GET"
+        },
+        {
+          "href": "https://uat.windcave.com/api/v1/transactions",
+          "rel": "refund",
+          "method": "POST"
+        }
+      ]
+    }
+  ]
+}

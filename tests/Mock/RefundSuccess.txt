@@ -1,0 +1,57 @@
+HTTP/1.1 200 OK
+Date: Thu, 01 May 2025 01:43:28 GMT
+Content-Type: application/json; charset=utf-8
+
+{
+  "id": "refundtransaction123",
+  "username": "merchant",
+  "authorised": true,
+  "allowRetry": false,
+  "retryIndicator": "",
+  "reCo": "00",
+  "responseText": "APPROVED",
+  "authCode": "001412",
+  "acquirer": {
+    "name": "Undefined",
+    "mid": "10000000",
+    "tid": "10001548",
+    "reCo": "00",
+    "responseText": "APPROVED"
+  },
+  "type": "refund",
+  "method": "card",
+  "localTimeZone": "UK_GMT",
+  "dateTimeUtc": "2025-08-19T01:34:55Z",
+  "dateTimeLocal": "2025-08-19T02:34:55+01:00",
+  "settlementDate": "2025-08-19",
+  "amount": "1.00",
+  "balanceAmount": "0.00",
+  "currency": "GBP",
+  "currencyNumeric": 826,
+  "clientType": "internet",
+  "merchantReference": "test1755567267ref",
+  "card": {
+    "cardNumber2": "9310200000000010",
+    "cardHolderName": "WHPP",
+    "cardNumber": "411111......1111",
+    "dateExpiryMonth": "02",
+    "dateExpiryYear": "29",
+    "type": "visa"
+  },
+  "cvc2ResultCode": "P",
+  "isSurcharge": false,
+  "amountTotal": "1.00",
+  "liabilityIndicator": "standard",
+  "links": [
+    {
+      "href": "https://uat.windcave.com/api/v1/transactions/00000004018b76c6",
+      "rel": "self",
+      "method": "GET"
+    },
+    {
+      "href": "https://uat.windcave.com/api/v1/transactions/00000004018b74de",
+      "rel": "parent",
+      "method": "GET"
+    }
+  ]
+}
