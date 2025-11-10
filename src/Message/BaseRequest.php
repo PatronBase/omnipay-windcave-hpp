@@ -79,7 +79,8 @@ abstract class BaseRequest extends AbstractRequest
 
     /**
      * @param $list
-     * Possible methods: ['card', 'account2account', 'alipay', 'applepay', 'googlepay', 'paypal', 'interac', 'unionpay', 'oxipay', 'visacheckout', 'wechat']
+     * Possible methods: ['card', 'account2account', 'alipay', 'applepay', 'googlepay', 'paypal', 'interac',
+     * 'unionpay', 'oxipay', 'visacheckout', 'wechat']
      *
      * @return PurchaseRequest
      */
@@ -91,8 +92,8 @@ abstract class BaseRequest extends AbstractRequest
             'oxipay', 'visacheckout', 'wechat'
         ];
 
-        foreach ( $list as $method ) {
-            if ( !in_array($method, $options) ) {
+        foreach ($list as $method) {
+            if (!in_array($method, $options)) {
                 throw new InvalidRequestException("Unknown payment method: {$method}");
             }
         }
@@ -160,7 +161,7 @@ abstract class BaseRequest extends AbstractRequest
             'resubmission', 'reauthorisation', 'delayedcharges', 'noshow'
         ];
 
-        if ( ! in_array($value, $options) ) {
+        if (! in_array($value, $options)) {
             throw new InvalidRequestException("Invalid option '{$value}' set for StoredCardIndicator.");
         }
 
@@ -192,7 +193,7 @@ abstract class BaseRequest extends AbstractRequest
             'twomonthly', 'threemonthly', 'fourmonthly', 'sixmonthly', 'annually'
         ];
 
-        if ( ! in_array($value, $options) ) {
+        if (! in_array($value, $options)) {
             throw new InvalidRequestException("Invalid option '{$value}' set for RecurringFrequency.");
         }
 

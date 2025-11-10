@@ -33,7 +33,12 @@ class RefundRequest extends BaseRequest
             'Authorization' => 'Basic ' . $this->getAuthorization(),
         ];
 
-        $httpResponse = $this->httpClient->request('POST', $this->getEndpoint('transactions'), $headers, json_encode($data));
+        $httpResponse = $this->httpClient->request(
+            'POST',
+            $this->getEndpoint('transactions'),
+            $headers,
+            json_encode($data)
+        );
 
         try {
             $responseData = json_decode($httpResponse->getBody()->getContents());

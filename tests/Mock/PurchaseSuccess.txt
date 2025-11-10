@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Thu, 10 November 2025 01:23:45 GMT
+Content-Type: application/json; charset=utf-8
+
+{
+  "id": "Kdjc6dikdiodkdjsudjj53nr63uj6s42",
+  "state": "init",
+  "links": [
+    {
+      "href": "https://uat.windcave.com/pxmi3/EF4054F622D6C4C1B5D0F260ED2B2C143C1EDCADD7A86374ED601212E11C409319CD439CC8082194B",
+      "rel": "hpp",
+      "method": "REDIRECT"
+    }
+  ],
+  "transactions": [
+    {}
+  ],
+  "customerId": "32424324"
+}
