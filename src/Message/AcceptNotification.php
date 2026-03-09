@@ -57,18 +57,22 @@ class AcceptNotification extends PurchaseRequest implements NotificationInterfac
         return $this->getTransaction()['id'] ?? '';
     }
 
-    public function getTransactionStatus()
+    public function getSessionState()
     {
-        if ($this->getTransaction() && $this->getAuthorised() && $this->getResponseText() === 'APPROVED') {
-            return static::STATUS_COMPLETED;
-        }
-
-        return static::STATUS_FAILED;
+        return $this->data['state'] ?? '';
     }
 
-    public function getAuthorised()
+    public function getTransactionStatus()
     {
-        return $this->getTransaction()['authorised'] ?? false;
+        $transaction = $this->getTransaction();
+
+        if (!$transaction) {
+            return null;
+        }
+
+        return ($transaction['authorised'] ?? false)
+            ? static::STATUS_COMPLETED
+            : static::STATUS_FAILED;
     }
 
     public function getResponseText()
