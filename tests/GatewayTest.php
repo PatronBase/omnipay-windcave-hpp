@@ -3,6 +3,7 @@
 namespace Omnipay\WindcaveHpp;
 
 use Omnipay\Tests\GatewayTestCase;
+use Omnipay\Common\Message\NotificationInterface;
 
 class GatewayTest extends GatewayTestCase
 {
@@ -85,4 +86,100 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame([], $response->getRedirectData());
     }
 
+    public function testCompletePurchaseSuccess()
+    {
+        $this->setMockHttpResponse('CompletePurchaseSuccess.txt');
+
+        $request = $this->gateway->completePurchase([
+            'apiUsername' => $this->options['apiUsername'],
+            'apiKey'      => $this->options['apiKey'],
+            'sessionId'   => 'session123',
+            'testMode'    => true,
+        ]);
+
+        $this->getHttpRequest()->request->set('sessionId','session123');
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('APPROVED', $response->getResponseText());
+        $this->assertSame('session123', $response->getSessionId());
+        $this->assertSame('merchantRef123', $response->getTransactionId());
+        $this->assertSame('transaction123', $response->getTransactionReference());
+        $this->assertSame('411111......1111', $response->getCard()['cardNumber']);
+    }
+
+    public function testAcceptNotificationPaid()
+    {
+        $this->setMockHttpResponse('CompletePurchaseSuccess.txt');
+
+        $this->getHttpRequest()->request->set('sessionId','session123');
+
+        $notification = $this->gateway->acceptNotification([
+            'apiUsername' => $this->options['apiUsername'],
+            'apiKey'      => $this->options['apiKey'],
+            'sessionId'   => 'session123',
+            'testMode'    => true,
+        ]);
+
+        $this->assertSame(NotificationInterface::STATUS_COMPLETED, $notification->getTransactionStatus());
+        $this->assertSame('transaction123', $notification->getTransactionReference());
+    }
+
+
+    public function testAcceptNotificationFailed()
+    {
+        $this->setMockHttpResponse('CompletePurchaseFailed.txt');
+
+        $this->getHttpRequest()->request->set('sessionId','session123');
+
+        $notification = $this->gateway->acceptNotification([
+            'apiUsername' => $this->options['apiUsername'],
+            'apiKey'      => $this->options['apiKey'],
+            'sessionId'   => 'SESSION123',
+            'testMode'    => true,
+        ]);
+
+        $this->assertSame(NotificationInterface::STATUS_FAILED, $notification->getTransactionStatus());
+    }
+
+    public function testRefundSuccess()
+    {
+        $this->setMockHttpResponse('RefundSuccess.txt');
+
+        $request = $this->gateway->refund([
+            'apiUsername'          => $this->options['apiUsername'],
+            'apiKey'               => $this->options['apiKey'],
+            'amount'               => '1.00',
+            'currency'             => 'GBP',
+            'transactionReference' => 'refundtransaction123',
+            'testMode'             => true,
+        ]);
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('refundtransaction123', $response->getTransactionReference());
+        $this->assertSame('APPROVED', $response->getMessage());
+    }
+
+    public function testRefundFailed()
+    {
+        $this->setMockHttpResponse('RefundFailed.txt');
+
+        $request = $this->gateway->refund([
+            'apiUsername'          => $this->options['apiUsername'],
+            'apiKey'               => $this->options['apiKey'],
+            'amount'               => '1.00',
+            'currency'             => 'GBP',
+            'transactionReference' => 'refundtransaction123',
+            'testMode'             => true,
+        ]);
+
+        $response = $request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame('refundtransaction123', $response->getTransactionReference());
+        $this->assertSame('DECLINED', $response->getMessage());
+    }
 }
