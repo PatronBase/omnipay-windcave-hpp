@@ -59,7 +59,7 @@ class AcceptNotification extends PurchaseRequest implements NotificationInterfac
 
     public function getTransactionStatus()
     {
-        if ($this->getTransaction() && $this->getAuthorised() && $this->getResponseText() === 'APPROVED') {
+        if ($this->getTransaction() && $this->getAuthorised() && str_starts_with($this->getResponseText(), 'APPROVED')) {
             return static::STATUS_COMPLETED;
         }
 

@@ -31,7 +31,7 @@ class CompletePurchaseResponse extends AbstractResponse
         return (
             $transaction &&
             ($transaction['authorised'] ?? false) &&
-            ( strtoupper($transaction['responseText'] ?? '') ) === 'APPROVED'
+            str_starts_with(strtoupper($transaction['responseText'] ?? ''), 'APPROVED')
         ) ?? false;
     }
 
