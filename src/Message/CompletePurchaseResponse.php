@@ -24,15 +24,16 @@ class CompletePurchaseResponse extends AbstractResponse
         parent::__construct($request, $data);
     }
 
+    public function getSessionState()
+    {
+        return $this->getData()['state'] ?? '';
+    }
+
     public function isSuccessful()
     {
         $transaction = $this->getTransactionResult();
 
-        return (
-            $transaction &&
-            ($transaction['authorised'] ?? false) &&
-            ( strtoupper($transaction['responseText'] ?? '') ) === 'APPROVED'
-        ) ?? false;
+        return $transaction && ($transaction['authorised'] ?? false);
     }
 
     public function getTransactionResult()

@@ -42,7 +42,7 @@ Content-Type: application/json; charset=utf-8
     {
       "id": "transaction123",
       "username": "merchant",
-      "authorised": true,
+      "authorised": false,
       "allowRetry": false,
       "retryIndicator": "",
       "reCo": "00",
