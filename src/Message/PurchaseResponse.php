@@ -7,19 +7,26 @@ use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
- * Windcave HPP Redirect Response
+ * Windcave HPP Purchase Response.
+ *
+ * Always represents an HPP session creation result from POST /sessions.
+ * MIT (stored card) charges go through MitPurchaseResponse instead.
  */
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {
-
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return false;
     }
 
-    public function isRedirect()
+    public function isRedirect(): bool
     {
-        return true;
+        foreach ($this->data->links ?? [] as $link) {
+            if ($link->rel === 'hpp') {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getRedirectUrl()
@@ -36,5 +43,25 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getRedirectData()
     {
         return [];
+    }
+
+    public function getTransactionReference(): ?string
+    {
+        return null;
+    }
+
+    public function getMessage(): ?string
+    {
+        return null;
+    }
+
+    public function getCard(): array
+    {
+        return [];
+    }
+
+    public function getCardReference(): ?string
+    {
+        return null;
     }
 }
