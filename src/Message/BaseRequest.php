@@ -156,7 +156,8 @@ abstract class BaseRequest extends AbstractRequest
     {
         $options = [
             'single', 'recurringfixed', 'recurringvariable', 'installment',
-            'recurringnoexpiry', 'recurringinitial', 'installmentinitial', 'credentialonfileinitial',
+            'recurringnoexpiry', 'recurringinitial', 'recurringfixedinitial', 'recurringvariableinitial',
+            'installmentinitial', 'credentialonfileinitial',
             'unscheduledcredentialonfileinitial', 'credentialonfile', 'unscheduledcredentialonfile', 'incremental',
             'resubmission', 'reauthorisation', 'delayedcharges', 'noshow'
         ];

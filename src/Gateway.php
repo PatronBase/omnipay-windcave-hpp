@@ -5,6 +5,7 @@ namespace Omnipay\WindcaveHpp;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\WindcaveHpp\Message\AcceptNotification;
 use Omnipay\WindcaveHpp\Message\CompletePurchaseRequest;
+use Omnipay\WindcaveHpp\Message\MitPurchaseRequest;
 use Omnipay\WindcaveHpp\Message\PurchaseRequest;
 use Omnipay\WindcaveHpp\Message\RefundRequest;
 
@@ -56,16 +57,20 @@ class Gateway extends AbstractGateway
     /**
      * Purchase
      *
+     * Routes to MitPurchaseRequest (/transactions) when a stored card token is present,
+     * otherwise creates a standard HPP session via PurchaseRequest (/sessions).
+     *
      * @param array $parameters Parameters
      *
-     * @return Omnipay\WindcaveHpp\Message\PurchaseRequest
+     * @return \Omnipay\WindcaveHpp\Message\PurchaseRequest|\Omnipay\WindcaveHpp\Message\MitPurchaseRequest
      */
     public function purchase(array $parameters = [])
     {
-        return $this->createRequest(
-            PurchaseRequest::class,
-            $parameters
-        );
+        if (!empty($parameters['token']) || !empty($parameters['cardReference'])) {
+            return $this->createRequest(MitPurchaseRequest::class, $parameters);
+        }
+
+        return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
     /**
@@ -89,6 +94,36 @@ class Gateway extends AbstractGateway
             AcceptNotification::class,
             $parameters
         )->send();
+    }
+
+    /**
+     * Create a card (add card only, delegates to purchase for HPP)
+     *
+     * @param array $parameters Parameters
+     *
+     * @return Omnipay\WindcaveHpp\Message\PurchaseRequest
+     */
+    public function createCard(array $parameters = [])
+    {
+        return $this->createRequest(
+            PurchaseRequest::class,
+            $parameters
+        );
+    }
+
+    /**
+     * Complete a create card process
+     *
+     * @param array $parameters Parameters
+     *
+     * @return Omnipay\WindcaveHpp\Message\CompletePurchaseRequest
+     */
+    public function completeCreateCard(array $parameters = [])
+    {
+        return $this->createRequest(
+            CompletePurchaseRequest::class,
+            $parameters
+        );
     }
 
     /**
